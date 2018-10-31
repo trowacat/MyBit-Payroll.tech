@@ -11,11 +11,11 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
-import createHistory from 'history/createBrowserHistory';
+import { BrowserRouter } from 'react-router-dom';
 import 'sanitize.css/sanitize.css';
+import BlockchainInfo from './components/Context/BlockchainInfo';
+
 
 // Import root app
 import App from 'containers/App';
@@ -26,8 +26,6 @@ import LanguageProvider from 'containers/LanguageProvider';
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=[name].[ext]!./.htaccess'; // eslint-disable-line import/extensions
-
-import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -44,21 +42,16 @@ openSansObserver.load().then(() => {
   document.body.classList.add('fontLoaded');
 });
 
-// Create redux store with history
-const initialState = {};
-const history = createHistory();
-const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = messages => {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
+    <BlockchainInfo>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </BlockchainInfo>
+  ,
     MOUNT_NODE,
   );
 };

@@ -1,7 +1,15 @@
 import { injectGlobal } from 'styled-components';
+import Gilroy from './fonts/gilroy-extrabold.otf';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
+
+  @font-face {
+      font-family: 'Gilroy';
+      src: url('${Gilroy}') format('opentype');
+      font-weight: bold;
+  }
+
   html,
   body {
     height: 100%;
@@ -11,6 +19,9 @@ injectGlobal`
 
   body {
     font-family: 'Roboto', sans-serif;
+    -moz-font-feature-settings: 'kern';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body.fontLoaded {
@@ -18,20 +29,21 @@ injectGlobal`
   }
 
   #app {
-    background-image: linear-gradient(62deg, #001358, #125ac4);
-    color: white;
     min-height: 100%;
     min-width: 100%;
   }
 
   p,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
+    font-family: Roboto, Times, 'Times New Roman', serif;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
   }
 
-  .ant-menu-horizontal {
-    background: transparent;
-    color: white;
+  [class^="ant-"]{
+    font-family: 'Roboto', sans-serif;
   }
 `;
